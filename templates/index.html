@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Text summariser</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    </head>
+    <body>
+        <h1>
+            Summariser
+        </h1>
+        <h3>
+            Uses a BART transformer to generate an accurate summary of an article or topic
+        </h3>
+        <div class="flex-container">
+            <div class="form">
+                <form action="/summary" method="post" autocomplete="off">
+                    <label for="text">
+                        <h2>Text input:</h2>
+                    </label>
+                    <input type="text" id="text" name="text" placeholder="Enter topic/link to article"><br>
+                    <input type="reset" value="Clear">
+                    <input type="submit" name="form" value="Submit">
+                </form>
+            </div>
+            <div class="explanation">
+                <h2>
+                    Explanation:
+                </h2>
+                <p>
+                If a url is inputted, the program will use the <a href="https://pypi.org/project/newspaper3k/">newspaper3k library</a> to scrape the text of the article.<br>
+                Otherwise, the program will then use the <a href="https://github.com/martin-majlis/Wikipedia-API/">wikipedia api</a> to find the corresponding article for the text inputted, and then get the text of the article.<br>
+                Then a <a href="https://arxiv.org/pdf/1910.13461.pdf">BART transformer</a> (pre-trained on the <a href="https://huggingface.co/facebook/bart-large-cnn">bart-large-cnn</a> model) is used to generate a summary of the given text.<br>
+                This summary is then checked for accuracy using the Rouge-2 F1 score from the <a href="https://aclanthology.org/W04-1013.pdf">Rouge package</a>.<br>
+                The reference summary used for accuracy checking is the first three sentences of the article.<br><br>
+                <a href="https://github.com/Kaziksobo/Summarizer">Github</a>
+                </p>
+            </div>
+        </div>
+    </body>
+</html>

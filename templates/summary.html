@@ -4,19 +4,28 @@
         <meta charset="utf-8">
         <title>Summary</title>
         <link rel="stylesheet" href="static/styles.css">
+        <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
     </head>
     <body>
-        <h1>
-            Text summarised:
-        </h1>
-        <p>
-            {{ text_title }}
-        </p>
-        <h1>
-            Summary:
-        </h1>
-        <p>
-            {{ summary }}
-        </p>
+        <div class="flex-container">
+            <div class="stats">
+                <h1>
+                    Stats:
+                </h1>
+                <p>
+                    Text summarised - {{ text_title }}<br>
+                    Time elapsed - {{ time }}s<br>
+                    Accuracy (Rouge-2 F1 score) - {{ score }}
+                </p>
+            </div>
+            <div class="summary">
+                <h1>
+                    Summary:
+                </h1>
+                <p>
+                    {{ summary }}
+                </p>
+            </div>
+        </div>
     </body>
 </html>

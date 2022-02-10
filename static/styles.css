@@ -30,14 +30,14 @@ a:hover {
     align-items: stretch;
     gap: 20px;
 }
-.explanation {
+.explanation, .summary {
     width: 60%;
     margin-right: 2%;
     padding: 15px;
     background-color: #1F2936;
     border-radius: 10px;
 }
-.form {
+.form, .stats {
     width: 40%;
     margin-left: 2%;
     background-color: #1F2936;
@@ -71,6 +71,5 @@ input[type=submit] {
     background-image: linear-gradient(to top right, #08772b, #087777);
 }
 input[type=submit]:hover {
-    /* background-image: linear-gradient(to top right, #ef4444, #fbbf24); */
     background-image: linear-gradient(to top right, #0ca73d, #0ca7a7);
 }

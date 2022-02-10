@@ -55,17 +55,22 @@ input[type=text] {
     box-sizing: border-box;
     background-color: #374151;
 }
-input[type=reset] {
+input[type=reset], input[type=submit] {
     width: 35%;
     color: white;
     padding: 10px;
     cursor: pointer;
-    background-color: #121927;
+}
+input[type=reset] {
+    background-image: linear-gradient(to top right, #750a0a, #7d5a03);
+}
+input[type=reset]:hover {
+    background-image: linear-gradient(to top right, #d31212, #e1a205);
 }
 input[type=submit] {
-    width: 35%;
-    color: white;
-    padding: 10px;
-    cursor: pointer;
-    background-image: linear-gradient(to top right, #ef4444, #fbbf24);
+    background-image: linear-gradient(to top right, #08772b, #087777);
+}
+input[type=submit]:hover {
+    /* background-image: linear-gradient(to top right, #ef4444, #fbbf24); */
+    background-image: linear-gradient(to top right, #0ca73d, #0ca7a7);
 }

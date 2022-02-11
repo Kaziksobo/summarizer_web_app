@@ -50,7 +50,7 @@ def summarise():
 
 @app.route('/flag', methods=['POST'])
 def flag():
-    global text_title, summary, score
+    global text_title, summary, score, timer
     f = open('flagged.csv', 'r+')
     f.close()
     flag = request.form['flag']

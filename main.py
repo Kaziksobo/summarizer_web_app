@@ -23,9 +23,12 @@ def summarise():
     f.close()
     start = time()
     # request text input from index.html
-    text = request.form['text']
+    text_inputted = request.form['text']
     # if the text is a url, scrape the article, otherwise scrape the wiki article for the text
-    text, text_title = article_scraper(text) if url(text) else wiki_scraper(text)
+    text, text_title = article_scraper(text_inputted) if url(text_inputted) else wiki_scraper(text_inputted)
+
+    if text_title == 'Error':
+        return render_template('error.html', text=text_inputted, error=text)
 
     print(f'summarising {text_title}')
     summary = None

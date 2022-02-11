@@ -15,7 +15,7 @@ def article_scraper(text):
         article.download()
         article.parse()
     except:
-        return 'That article cannot be summarised', 'Error'
+        return 'Error - that article cannot be summarised', 'Error'
     return article.text.replace('\n', ''), article.title
 
 def wiki_scraper(text):

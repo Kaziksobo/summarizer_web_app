@@ -30,14 +30,14 @@ a:hover {
     align-items: stretch;
     gap: 20px;
 }
-.explanation, .summary {
+.explanation, .summary, .error {
     width: 60%;
     margin-right: 2%;
     padding: 15px;
     background-color: #1F2936;
     border-radius: 10px;
 }
-.form, .stats {
+.form, .stats, .input {
     width: 40%;
     margin-left: 2%;
     background-color: #1F2936;

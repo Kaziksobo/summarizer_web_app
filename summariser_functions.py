@@ -66,3 +66,10 @@ def log(text_title, summary, score, time):
         write_object = writer(f_object)
         write_object.writerow(row_contents)
         f_object.close()
+
+def report(text_title, summary, score, flag):
+    row_contents = [text_title, summary, score, flag]
+    with open('flagged.csv', 'a', encoding='utf-8', newline='') as f_object:
+        write_object = writer(f_object)
+        write_object.writerow(row_contents)
+        f_object.close()

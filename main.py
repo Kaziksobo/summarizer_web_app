@@ -46,7 +46,10 @@ def summarise():
     timer = round(end - start, 2)
     print(f'summary generated in {timer}s')
     log(text_title, summary, score, timer)
-    return render_template('summary.html', summary=summary, text_title=text_title, time=timer, score=round(score, 2))
+    reduction = round(((len(text) - len(summary)) / len(text)) * 100, 2)
+    print(len(summary))
+    print(len(text))
+    return render_template('summary.html', summary=summary, text_title=text_title, time=timer, score=round(score, 2), reduction=reduction)
 
 @app.route('/flag', methods=['POST'])
 def flag():

@@ -1,3 +1,4 @@
+from datetime import datetime
 from newspaper import Article
 from transformers import BartForConditionalGeneration, BartTokenizer
 import wikipedia
@@ -60,8 +61,8 @@ def summary_score(summary, text):
     return scores['rouge-2']['f']
 
 def log(text_title, summary, score, time):
-    row_contents = [text_title, summary, score, time]
-    with open('log.csv', 'a',newline='') as f_object:
+    row_contents = [text_title, summary, score, time, str(datetime.now())]
+    with open('log.csv', 'a', encoding='utf-8', newline='') as f_object:
         write_object = writer(f_object)
         write_object.writerow(row_contents)
         f_object.close()

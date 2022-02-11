@@ -36,7 +36,7 @@ def csv_checker(text_title):
             (None, None),
         )
 
-def summary_generator(text, text_title):
+def summary_generator(text):
     # creates summary using BART transformer from huggingfaces
     checkpoint = 'facebook/bart-large-cnn'
     # create tokenizer using checkpoint model

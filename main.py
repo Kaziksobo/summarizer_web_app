@@ -35,7 +35,7 @@ def summarise():
     summary = None
     summary, score = csv_checker(text_title)
     if not summary:
-        summary = summary_generator(text, text_title)
+        summary = summary_generator(text)
         # fixing summary format
         summary = sent_tokenize(summary)
         if summary[-1][-1] != '.':

@@ -9,6 +9,7 @@ summary = ''
 score = 0
 timer = 0
 error = ''
+reduction = 0
 
 app = Flask(__name__)
 
@@ -18,7 +19,7 @@ def index():
 
 @app.route('/summary', methods=['POST'])
 def summarise():
-    global text_title, summary, score, timer, error
+    global text_title, summary, score, timer, error, reduction
     f = open('log.csv', 'r+')
     f.close()
     start = time()
@@ -60,13 +61,13 @@ def summarise():
 
 @app.route('/flag', methods=['POST'])
 def flag():
-    global text_title, summary, score, timer, error
+    global text_title, summary, score, timer, error, reduction
     f = open('flagged.csv', 'r+')
     f.close()
     flag = request.form['flag']
     report(text_title, summary, score, flag)
     print(error)
-    return render_template('flag.html', summary=summary, text_title=text_title, time=timer, score=round(score, 2), error=error)
+    return render_template('flag.html', summary=summary, text_title=text_title, time=timer, score=round(score, 2), error=error, reduction=reduction)
 
 if __name__ == '__main__':
     app.run(debug=True, host='127.0.0.1', port=5000)

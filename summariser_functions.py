@@ -5,7 +5,7 @@ import wikipedia
 import wikipediaapi
 from rouge import Rouge
 from nltk.tokenize import sent_tokenize
-from csv import writer
+from csv import writer, reader
 wiki_api = wikipediaapi.Wikipedia('en')
 
 def article_scraper(text):
@@ -28,9 +28,16 @@ def wiki_scraper(text):
         return 'Error - that topic cannot be summarised', 'Error'
     return wikisearch.text, text_title
 
+def csv_checker(text_title):
+    with open('log.csv', 'rt') as f:
+        log = reader(f)
+        return next(
+            ((row[1], float(row[2])) for row in log if text_title == row[0]),
+            (None, None),
+        )
+
 def summary_generator(text, text_title):
     # creates summary using BART transformer from huggingfaces
-    print(f'summarising {text_title}')
     checkpoint = 'facebook/bart-large-cnn'
     # create tokenizer using checkpoint model
     tokenizer = BartTokenizer.from_pretrained(checkpoint)

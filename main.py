@@ -3,7 +3,9 @@ from csv import writer
 from time import time
 from validators import url
 from nltk.tokenize import sent_tokenize
+import nltk
 from summariser_functions import article_scraper, csv_checker, wiki_scraper, summary_generator, summary_score, log, report
+nltk.download('punkt')
 
 # set these as global variables so they work on the flagged page
 text_title = ''

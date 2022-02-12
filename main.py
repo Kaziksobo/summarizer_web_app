@@ -1,4 +1,5 @@
 from flask import Flask, request, render_template
+from csv import writer
 from time import time
 from validators import url
 from nltk.tokenize import sent_tokenize
@@ -22,8 +23,13 @@ def index():
 def summarise():
     global text_title, summary, score, timer, error, reduction
     # just incase the log file isnt already created, this will do it
-    f = open('log.csv', 'r+')
-    f.close()
+    try:
+        file = open('log.csv', 'r')
+    except FileNotFoundError:
+        file = open('log.csv', 'w')
+        csv_writer = writer(file)
+        csv_writer.writerow(['text title', 'summary', 'score', 'generation time', 'datetime'])
+    file.close()
     start = time()
     # request text input from index.html
     text_inputted = request.form['text']
@@ -69,8 +75,13 @@ def summarise():
 def flag():
     global text_title, summary, score, timer, error, reduction
     # just incase the flagged file hasnt been created, this will do it
-    f = open('flagged.csv', 'r+')
-    f.close()
+    try:
+        file = open('flagged.csv', 'r')
+    except FileNotFoundError:
+        file = open('flagged.csv', 'w')
+        csv_writer = writer(file)
+        csv_writer.writerow(['text title', 'summary', 'score', 'flag'])
+    file.close()
     flag = request.form['flag']
     report(text_title, summary, score, flag)
     print(error)

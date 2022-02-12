@@ -4,6 +4,7 @@ from validators import url
 from nltk.tokenize import sent_tokenize
 from summariser_functions import article_scraper, csv_checker, wiki_scraper, summary_generator, summary_score, log, report
 
+# set these as global variables so they work on the flagged page
 text_title = ''
 summary = ''
 score = 0
@@ -20,6 +21,7 @@ def index():
 @app.route('/summary', methods=['POST'])
 def summarise():
     global text_title, summary, score, timer, error, reduction
+    # just incase the log file isnt already created, this will do it
     f = open('log.csv', 'r+')
     f.close()
     start = time()
@@ -28,9 +30,11 @@ def summarise():
     # if the text is a url, scrape the article, otherwise scrape the wiki article for the text
     text, text_title = article_scraper(text_inputted) if url(text_inputted) else wiki_scraper(text_inputted)
 
+    # if no article or wiki page could be found for the input, go to error page
     if text_title == 'Error':
         return render_template('error.html', text=text_inputted, error=text)
 
+    # checks if summary already exists in log file
     print(f'summarising {text_title}')
     summary = None
     summary, score = csv_checker(text_title)
@@ -49,6 +53,8 @@ def summarise():
     timer = round(end - start, 2)
     print(f'summary generated in {timer}s')
     log(text_title, summary, score, timer)
+    
+    # calculates reduction in size from the original text to the summary
     reduction = round(((len(text) - len(summary)) / len(text)) * 100, 2)
 
     error = ''
@@ -62,6 +68,7 @@ def summarise():
 @app.route('/flag', methods=['POST'])
 def flag():
     global text_title, summary, score, timer, error, reduction
+    # just incase the flagged file hasnt been created, this will do it
     f = open('flagged.csv', 'r+')
     f.close()
     flag = request.form['flag']

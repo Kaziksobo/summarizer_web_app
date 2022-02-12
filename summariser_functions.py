@@ -21,6 +21,8 @@ def article_scraper(text):
 def wiki_scraper(text):
     # This code is so crap
     # I use both a python wrapper for the wikipedia api and an unmaintened wikipedia module
+    # the module has a useful search function which I don't think the api wrapper has
+    # but the module's function for getting the page from its title is buggy
     try:
         text_title = wikipedia.search(text)[0]
         wikisearch = wiki_api.page(text_title)
@@ -29,6 +31,7 @@ def wiki_scraper(text):
     return wikisearch.text, text_title
 
 def csv_checker(text_title):
+    # checks if the title of the text to be summarised is in the log file, if so gets the summary from there
     with open('log.csv', 'rt') as f:
         log = reader(f)
         return next(
@@ -63,11 +66,15 @@ def summary_generator(text):
     )
 
 def summary_score(summary, text):
+    # calculate the accuracy of the summary using the rouge metric
+    # uses the first three sentences of the article as the refernce summary (may be a good idea? not sure?)
     reference = ' '.join(sent_tokenize(text)[:3])
     scores = Rouge().get_scores(summary, reference)[0]
+    # uses the Rouge-2 (2-gram) F1-score (combination of recall and precision)
     return scores['rouge-2']['f']
 
 def log(text_title, summary, score, time):
+    # logs the summary and its details to a log file
     row_contents = [text_title, summary, score, time, str(datetime.now())]
     with open('log.csv', 'a', encoding='utf-8', newline='') as f_object:
         write_object = writer(f_object)
@@ -75,6 +82,7 @@ def log(text_title, summary, score, time):
         f_object.close()
 
 def report(text_title, summary, score, flag):
+    # logs the summary and some details (including the report reason) to a seperate log file
     row_contents = [text_title, summary, score, flag]
     with open('flagged.csv', 'a', encoding='utf-8', newline='') as f_object:
         write_object = writer(f_object)

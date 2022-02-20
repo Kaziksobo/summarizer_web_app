@@ -1,5 +1,7 @@
 # summariser
 
+Note - no compatble with python 3.10
+
 ## Explanation
 
 If a url is inputted, the program will use the [newspaper3k module](https://pypi.org/project/newspaper3k/) to scrape the text of the article.\

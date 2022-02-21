@@ -1,6 +1,6 @@
 # summariser
 
-Note - no compatble with python 3.10
+Note - not compatble with python 3.10
 
 ## Explanation
 

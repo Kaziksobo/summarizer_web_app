@@ -24,7 +24,7 @@ def index():
 @app.route('/summary', methods=['POST'])
 def summarise():
     global text_title, summary, score, timer, error, reduction
-    # just incase the log file isnt already created, this will do it
+    # just in case the log file isnt already created, this will do it
     try:
         file = open('log.csv', 'r')
     except FileNotFoundError:
@@ -90,4 +90,4 @@ def flag():
     return render_template('flag.html', summary=summary, text_title=text_title, time=timer, score=round(score, 2), error=error, reduction=reduction)
 
 if __name__ == '__main__':
-    app.run(debug=True, host='127.0.0.1', port=5000)
+    app.run(debug=True, host='127.0.0.1', port=8000)

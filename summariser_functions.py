@@ -32,12 +32,15 @@ def wiki_scraper(text):
 
 def csv_checker(text_title):
     # checks if the title of the text to be summarised is in the log file, if so gets the summary from there
-    with open('log.csv', 'rt') as f:
-        log = reader(f)
-        return next(
-            ((row[1], float(row[2])) for row in log if text_title == row[0]),
-            (None, None),
-        )
+    try:
+        with open('log.csv', 'rt') as f:
+            log = reader(f)
+            return next(
+                ((row[1], float(row[2])) for row in log if text_title == row[0]),
+                (None, None),
+            )
+    except:
+        return (None, None)
 
 def summary_generator(text):
     # creates summary using BART transformer from huggingfaces

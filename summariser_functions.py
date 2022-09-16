@@ -70,7 +70,7 @@ def summary_generator(text):
 
 def summary_score(summary, text):
     # calculate the accuracy of the summary using the rouge metric
-    # uses the first three sentences of the article as the refernce summary (may be a good idea? not sure?)
+    # uses the first three sentences of the article as the reference summary (may be a good idea? not sure?)
     reference = ' '.join(sent_tokenize(text)[:3])
     scores = Rouge().get_scores(summary, reference)[0]
     # uses the Rouge-2 (2-gram) F1-score (combination of recall and precision)

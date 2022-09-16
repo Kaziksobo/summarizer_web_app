@@ -73,6 +73,7 @@ def summarise():
         error = f'Error - Summary generated may not be accurate (Rouge-2 F1 score of {score})'
     return render_template('summary.html', summary=summary, text_title=text_title, time=timer, score=round(score, 2), reduction=reduction, error=error)
 
+# page doesnt work - the summary and stats dont appear
 @app.route('/flag', methods=['POST'])
 def flag():
     global text_title, summary, score, timer, error, reduction

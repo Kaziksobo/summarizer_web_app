@@ -4,8 +4,9 @@ from time import time
 from validators import url
 from nltk.tokenize import sent_tokenize
 import nltk
-from summariser_functions import article_scraper, csv_checker, wiki_scraper, summary_generator, summary_score, log, report
+from summariser_functions import csv_checker, wiki_scraper, summary_generator, summary_score, log, report
 nltk.download('punkt')
+nltk.download('punkt_tab')
 
 # set these as global variables so they work on the flagged page
 text_title = ''
@@ -36,7 +37,7 @@ def summarise():
     # request text input from index.html
     text_inputted = request.form['text']
     # if the text is a url, scrape the article, otherwise scrape the wiki article for the text
-    text, text_title = article_scraper(text_inputted) if url(text_inputted) else wiki_scraper(text_inputted)
+    text, text_title = wiki_scraper(text_inputted)
 
     # if no article or wiki page could be found for the input, go to error page
     if text_title == 'Error':

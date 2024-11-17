@@ -1,22 +1,26 @@
 from datetime import datetime
-from newspaper import Article
+# from newspaper import Article
 from transformers import BartForConditionalGeneration, BartTokenizer
 import wikipedia
 import wikipediaapi
 from rouge import Rouge
 from nltk.tokenize import sent_tokenize
 from csv import writer, reader
-wiki_api = wikipediaapi.Wikipedia('en')
 
-def article_scraper(text):
-    # scrapes text of the article using newspaper3k
-    try:
-        article = Article(text)
-        article.download()
-        article.parse()
-    except:
-        return 'Error - that article cannot be summarised', 'Error'
-    return article.text.replace('\n', ''), article.title
+# Setting up the wikipedia api
+# user agent for the wikipedia api
+wiki_user_agent = 'KazikSummariser/1.0 (kaziksobo@outlook.com)'
+wiki_api = wikipediaapi.Wikipedia(user_agent=wiki_user_agent, language='en')
+
+# def article_scraper(text):
+#     # scrapes text of the article using newspaper3k
+#     try:
+#         article = Article(text)
+#         article.download()
+#         article.parse()
+#     except:
+#         return 'Error - that article cannot be summarised', 'Error'
+#     return article.text.replace('\n', ''), article.title
 
 def wiki_scraper(text):
     # This code is so crap

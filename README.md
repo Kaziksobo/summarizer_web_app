@@ -1,6 +1,6 @@
 # summariser
 
-Note - not compatble with python 3.10
+Note - article scraper currently removed and transformer model is not working.
 
 ## Explanation
 
